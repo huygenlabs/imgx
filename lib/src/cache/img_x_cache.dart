@@ -83,12 +83,12 @@ class ImgXCache with ImgXPrefs {
     return cachedData.data;
   }
 
-  Future removeWhere(String keyword) async{
+  Future removeWhere(String keyword) async {
     cacheMemoryMap.removeWhere((key, value) => key.contains(keyword));
     await super.remove(keyword);
   }
 
-  Future removeAll() async{
+  Future removeAll() async {
     cacheMemoryMap.clear();
     await super.clearAll();
   }

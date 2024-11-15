@@ -42,7 +42,8 @@ class _HomePageState extends State<HomePage> {
                   "https://www.loudegg.com/wp-content/uploads/2020/10/Fred-Flintstone.jpg",
               fit: BoxFit.fitHeight,
               onProgress: (progress) {
-                debugPrint("Download progress: ${(progress * 100).toStringAsFixed(2)}%");
+                debugPrint(
+                    "Download progress: ${(progress * 100).toStringAsFixed(2)}%");
               },
             ),
           ],
