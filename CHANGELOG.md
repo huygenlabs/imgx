@@ -5,3 +5,8 @@
 ## [0.1.1] - (16th November 2024)
 
 - Improved package score.
+
+## [0.1.1] - (16th November 2024)
+
+- Improved documentation and score.
+- Added test cases for the package.

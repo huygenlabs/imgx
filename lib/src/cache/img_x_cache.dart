@@ -4,7 +4,6 @@ import 'package:imgx/src/prefs/img_x_prefs.dart';
 /// Created by Lovepreet Singh on 20/12/22.
 
 class CacheModel {
-
   /// dynamic param to save image data
   dynamic data;
 
@@ -55,12 +54,11 @@ class ImgXCache with ImgXPrefs {
 
   /// Get data from cache
   dynamic getCache(String key, Duration cacheDuration) =>
-      _getFromMemory(key, cacheDuration);
-
+      getFromMemory(key, cacheDuration);
 
   /// Get data from cache asynchronously
   Future<dynamic> getCacheAsync(String key, Duration cacheDuration) async {
-    dynamic data = _getFromMemory(key, cacheDuration);
+    dynamic data = getFromMemory(key, cacheDuration);
     if (data != null) {
       return data;
     }
@@ -68,7 +66,7 @@ class ImgXCache with ImgXPrefs {
   }
 
   /// Get data from memory
-  dynamic _getFromMemory(String key, Duration cacheDuration) {
+  dynamic getFromMemory(String key, Duration cacheDuration) {
     var item = cacheMemoryMap[key];
     if (item == null) {
       return null;
@@ -101,13 +99,23 @@ class ImgXCache with ImgXPrefs {
 
   /// Remove data from cache
   Future removeWhere(String keyword) async {
-    cacheMemoryMap.removeWhere((key, value) => key.contains(keyword));
+    removeFromMemory(keyword);
     await super.remove(keyword);
+  }
+
+  /// Remove data from memory
+  void removeFromMemory(String keyword) async {
+    cacheMemoryMap.removeWhere((key, value) => key.contains(keyword));
   }
 
   /// Clear all data from cache
   Future removeAll() async {
-    cacheMemoryMap.clear();
+    clearAllMemoryCache();
     await super.clearAll();
+  }
+
+  /// Clear all data from memory
+  void clearAllMemoryCache() {
+    cacheMemoryMap.clear();
   }
 }
