@@ -9,18 +9,40 @@ import 'package:imgx/src/image_widget/img_x_source.dart';
 /// Created by lovepreetsingh on 14,November,2024
 
 class ImgXLoader extends StatefulWidget {
+  /// Image uri
   final String imageUri;
+
+  /// BoxFit
   final BoxFit fit;
+
+  /// Widget to show while loading the image
   final Widget? progressWidget;
+
+  /// Widget to show if there is an error loading the image
   final Widget? errorWidget;
+
+  /// Width of the image
   final double? width;
+
+  /// Height of the image
   final double? height;
+
+  /// Type of cache
   final CacheType? cacheType;
+
+  /// Duration for which the image should be cached
   final Duration? cacheDuration;
+
+  /// Headers for the api like authorization token
   final Map<String, String> headers;
+
+  /// Number of times to retry loading the image
   final int? retryCount;
+
+  /// Callback to get the download progress
   final Function(double progress)? onProgress;
 
+  /// Constructor
   const ImgXLoader(
       {required this.imageUri,
       this.width,
