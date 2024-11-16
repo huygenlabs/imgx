@@ -6,7 +6,7 @@ First, add `imgx` as a dependency in your pubspec.yaml file.
 
 ```yaml
 dependencies:
-  imgx: ^0.1.0
+  imgx: ^0.1.2
 ```
 
 Don't forget to `flutter pub get`.
@@ -81,12 +81,6 @@ If you find this package useful, you can support it for free by giving it a thum
 
 
 Congrats you finished your setup for ImgX.
-
-# FAQs
-
-## I got the error 'module flutter_native_splash' not found.
-
-You may need to run the `pod install` command in your app's `ios` folder.
 
 
 # Bugs or Requests
