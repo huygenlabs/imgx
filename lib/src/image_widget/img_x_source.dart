@@ -7,6 +7,7 @@ import 'package:logger/logger.dart';
 /// Created by lovepreetsingh on 14, November, 2024
 
 mixin ImgXSource {
+  /// Logger instance
   final logger = Logger(
     printer: PrettyPrinter(
       colors: true,
@@ -15,8 +16,10 @@ mixin ImgXSource {
     ),
   );
 
+  /// Saved Image data
   Uint8List? data;
 
+  /// Get Image from network
   Future<Uint8List?> getImage(
     String url,
     Map<String, String> headers,

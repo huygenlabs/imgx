@@ -1,6 +1,6 @@
 name: imgx
-description: "Image loader with memory || disk caching and retry loading."
-version: 0.1.0
+description: "Flutter package for efficient image loading from URLs, supporting formats like PNG, JPG, WEBP, and GIF. It features memory/disk caching with expiration, a retry mechanism for failures, and real-time progress tracking for seamless server image handling."
+version: 0.1.1
 homepage: "https://github.com/huygenlabs/imgx"
 
 environment:
