@@ -6,7 +6,10 @@
 
 - Improved package score.
 
-## [0.1.1] - (16th November 2024)
+## [0.1.2] - (16th November 2024)
 
 - Improved documentation and score.
-- Added test cases for the package.
+
+## [0.1.3] - (16th November 2024)
+
+- Added test cases for image caching.
