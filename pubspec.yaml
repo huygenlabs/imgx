@@ -22,10 +22,8 @@ dev_dependencies:
   mockito: ^5.4.5
 
 topics:
-  - img
   - image
   - image-loading
   - image-caching
   - image-download
   - image-retry
-  - image-progress
