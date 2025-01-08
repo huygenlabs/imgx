@@ -13,3 +13,8 @@
 - ## [0.1.3] - (16th November 2024)
 
 - Added test cases for the package.
+ 
+- ## [0.1.4] - (8th January 2025)
+
+- Fix for cache removal from memory.
+- Updated dependencies.

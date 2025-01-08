@@ -6,7 +6,7 @@ First, add `imgx` as a dependency in your pubspec.yaml file.
 
 ```yaml
 dependencies:
-  imgx: ^0.1.2
+  imgx: ^0.1.4
 ```
 
 Don't forget to `flutter pub get`.
@@ -69,6 +69,9 @@ You can remove all cached images or use image url to remove single one as in fol
 import 'package:imgx/imgx.dart';
 
 void removeCache(){
+  //Partial Match
+  ImgX.removeCacheWhere(key: "Fred-Flintstone.jpg");
+  //Full Match
   ImgX.removeCacheWhere(key: "https://www.loudegg.com/wp-content/uploads/2020/10/Fred-Flintstone.jpg");
   ImgX.removeAllCache();
 }
