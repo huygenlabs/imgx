@@ -45,7 +45,7 @@ class ImgX extends ImgXLoader {
 
   /// Remove cached image where key is [key]
   static Future removeCacheWhere({required String key}) =>
-      ImgXCache.instance.remove(key);
+      ImgXCache.instance.removeWhere(key);
 
   /// Remove all cached images
   static Future removeAllCache() => ImgXCache.instance.removeAll();
