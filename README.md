@@ -6,14 +6,14 @@ First, add `imgx` as a dependency in your pubspec.yaml file.
 
 ```yaml
 dependencies:
-  imgx: ^0.1.4
+  imgx: ^0.1.5
 ```
 
 Don't forget to `flutter pub get`.
 
 ## 1. Set up app global configuration (optional)
 
-You can set global cacheType, cacheDuration, and retryCount for the entire app. You can also set these on a widget level, where widget level params will take precedence over global configurations. If you don't set any of these, the default values will be used.
+You can set global cacheType, cacheDuration, retryCount and errorLogging for the entire app. You can also set these on a widget level, where widget level params will take precedence over global configurations. If you don't set any of these, the default values will be used.
 
 ```dart
 import 'package:example/home_page.dart';
@@ -23,6 +23,7 @@ void main() {
   ImgXConfig.globalCacheType = CacheType.memory;
   ImgXConfig.globalCacheDuration = const Duration(days: 1);
   ImgXConfig.globalRetryCount = 3;
+  ImgXConfig.globalLogErrors = true/false;
 
   runApp(const MyApp());
 }

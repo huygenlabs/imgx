@@ -18,3 +18,8 @@
 
 - Fix for cache removal from memory.
 - Updated dependencies.
+- 
+- ## [0.1.5] - (30th June 2025)
+
+- Global option to set error logs.
+- Updated to Flutter 3.32.5

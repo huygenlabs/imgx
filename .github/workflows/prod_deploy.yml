@@ -3,11 +3,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: build_test
+name: prod_deploy
 
-on:
-  pull_request:
-    branches: [ "master" ]
+on: workflow_dispatch
 
 jobs:
   build:
@@ -37,3 +35,6 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run tests
         run: flutter test
+
+      - name: Deploy on pub.dev
+        run: dart pub publish
