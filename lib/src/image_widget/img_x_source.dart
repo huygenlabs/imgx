@@ -25,7 +25,8 @@ mixin ImgXSource {
     Map<String, String> headers,
     CacheType cacheType,
     Duration cacheDuration,
-    int retryCount, {
+    int retryCount,
+    bool logErrors, {
     Function(double progress)? onProgress,
   }) async {
     // Return if present from cache
@@ -69,11 +70,16 @@ mixin ImgXSource {
           data = imageData;
           return data;
         } else {
-          logger.e("Error: ${response.statusCode} - ${response.reasonPhrase}");
+          if (logErrors) {
+            logger
+                .e("Error: ${response.statusCode} - ${response.reasonPhrase}");
+          }
         }
       } catch (e) {
-        logger.e("Error fetching image_widget : $e",
-            error: e, stackTrace: StackTrace.current);
+        if (logErrors) {
+          logger.e("Error fetching image : $e",
+              error: e, stackTrace: StackTrace.current);
+        }
       }
     }
 

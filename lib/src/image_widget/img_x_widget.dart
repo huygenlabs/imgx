@@ -67,7 +67,7 @@ class _ImgXLoaderState extends State<ImgXLoader> with ImgXSource {
   late CacheType cacheType;
   late Duration cacheDuration;
   late int retryCount;
-
+  late bool logErrors;
   @override
   void initState() {
     cacheType = widget.cacheType ?? ImgXConfig.globalCacheType;
@@ -75,6 +75,7 @@ class _ImgXLoaderState extends State<ImgXLoader> with ImgXSource {
     progressWidget = widget.progressWidget ?? ImgXConfig.globalProgressWidget;
     errorWidget = widget.errorWidget ?? ImgXConfig.globalErrorWidget;
     retryCount = widget.retryCount ?? ImgXConfig.globalRetryCount;
+    logErrors = ImgXConfig.globalLogErrors;
     super.initState();
   }
 
@@ -88,7 +89,7 @@ class _ImgXLoaderState extends State<ImgXLoader> with ImgXSource {
     }
     return FutureBuilder<Uint8List?>(
         future: getImage(widget.imageUri, widget.headers, cacheType,
-            cacheDuration, retryCount,
+            cacheDuration, retryCount, logErrors,
             onProgress: widget.onProgress),
         builder: (ctx, snapshot) {
           data = snapshot.data;
@@ -126,7 +127,9 @@ class _ImgXLoaderState extends State<ImgXLoader> with ImgXSource {
             fit: widget.fit,
             width: widget.width,
             height: widget.height, errorBuilder: (context, error, stackTrace) {
-          logger.e(error.toString());
+          if (logErrors) {
+            logger.e(error.toString());
+          }
           return errorWidget ?? _errorWidget();
         }),
       );
@@ -138,7 +141,9 @@ class _ImgXLoaderState extends State<ImgXLoader> with ImgXSource {
             fit: widget.fit,
             width: widget.width,
             height: widget.height, errorBuilder: (context, error, stackTrace) {
-          logger.e(error.toString());
+          if (logErrors) {
+            logger.e(error.toString());
+          }
           return SizedBox(
               width: widget.width,
               height: widget.height,

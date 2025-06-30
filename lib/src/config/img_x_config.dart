@@ -18,4 +18,7 @@ class ImgXConfig {
 
   /// Global retry count
   static int globalRetryCount = 0;
+
+  /// Log errors
+  static bool globalLogErrors = false;
 }
