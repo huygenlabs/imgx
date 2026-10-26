@@ -9,5 +9,5 @@ enum CacheType {
   disk,
 
   /// Do not save, will not save in memory or disk
-  none
+  none,
 }

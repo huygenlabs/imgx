@@ -15,10 +15,7 @@ class CacheModel {
 
   /// Convert to json
   Map<String, dynamic> toJson() {
-    return {
-      'data': data,
-      'cacheDuration': cacheDuration,
-    };
+    return {'data': data, 'cacheDuration': cacheDuration};
   }
 }
 
@@ -33,23 +30,31 @@ class ImgXCache with ImgXPrefs {
   Map<String, CacheModel> cacheMemoryMap = {};
 
   /// Save data in cache
-  void putCache(String key, dynamic data,
-      {required CacheType cacheType, required Duration cacheDuration}) {
+  void putCache(
+    String key,
+    dynamic data, {
+    required CacheType cacheType,
+    required Duration cacheDuration,
+  }) {
     if (cacheType == CacheType.memory) {
       cacheMemoryMap[key] = CacheModel(
         data: data,
-        cacheDuration: DateTime.now().millisecondsSinceEpoch +
+        cacheDuration:
+            DateTime.now().millisecondsSinceEpoch +
             cacheDuration.inMilliseconds,
       );
       return;
     }
     /** save in disk */
     super.saveImageCache(
-        key,
-        CacheModel(
-            data: data,
-            cacheDuration: DateTime.now().millisecondsSinceEpoch +
-                cacheDuration.inMilliseconds));
+      key,
+      CacheModel(
+        data: data,
+        cacheDuration:
+            DateTime.now().millisecondsSinceEpoch +
+            cacheDuration.inMilliseconds,
+      ),
+    );
   }
 
   /// Get data from cache

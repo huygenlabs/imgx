@@ -6,7 +6,7 @@ First, add `imgx` as a dependency in your pubspec.yaml file.
 
 ```yaml
 dependencies:
-  imgx: ^0.1.5
+  imgx: ^0.1.6
 ```
 
 Don't forget to `flutter pub get`.
@@ -14,6 +14,8 @@ Don't forget to `flutter pub get`.
 ## 1. Set up app global configuration (optional)
 
 You can set global cacheType, cacheDuration, retryCount and errorLogging for the entire app. You can also set these on a widget level, where widget level params will take precedence over global configurations. If you don't set any of these, the default values will be used.
+
+When error logging is enabled, failures are reported through `dart:developer`, so they appear in the Flutter debug console, DevTools, logcat and the Apple unified log without any extra dependency.
 
 ```dart
 import 'package:example/home_page.dart';
@@ -79,7 +81,28 @@ void removeCache(){
 
 ```
 
-## 4. Support the package (optional)
+## 4. Where the disk cache lives
+
+Disk caching needs no plugin. Cached images are written as individual files in an `imgx_cache` directory inside the platform temporary directory (`Directory.systemTemp`). The OS may clear that directory when storage runs low, which is fine for an image cache that has an expiry anyway. Nothing is written to the app documents folder or to `shared_preferences`.
+
+Expired entries are deleted the next time they are read, and `ImgX.removeAllCache()` and `ImgX.removeCacheWhere()` only ever touch files owned by ImgX.
+
+On web the disk cache falls back to memory, because `dart:io` is not available there.
+
+## 5. Networking
+
+ImgX has no dependencies outside the Flutter SDK. Downloads use `dart:io`'s `HttpClient` on iOS, Android, macOS, Windows and Linux, and `XMLHttpRequest` on the web.
+
+Browsers only let JavaScript read a response body when the server sends CORS headers, so on web:
+
+- images from servers that allow CORS (same-origin URLs and most CDNs) are downloaded, cached and report progress exactly like on native platforms;
+- images from servers without CORS headers are drawn through an HTML `<img>` element instead, so they still show up, but they cannot be cached or report progress.
+
+Those blocked requests are not retried, because a browser CORS decision never changes on a second attempt.
+
+Custom `headers` are sent on web too, which makes the request non-simple and can trigger a CORS preflight. HTML elements cannot carry headers, so an image that needs custom headers can only load on web when the server allows CORS. Send no headers for public cross-origin images if you want the `<img>` fallback.
+
+## 6. Support the package (optional)
 
 If you find this package useful, you can support it for free by giving it a thumbs up at the top of this page. 
 

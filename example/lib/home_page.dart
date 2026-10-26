@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:imgx/imgx.dart';
 
@@ -31,19 +32,19 @@ class _HomePageState extends State<HomePage> {
               cacheDuration: const Duration(days: 1),
               cacheType: CacheType.memory,
               retryCount: 2,
-              headers: {"Authorization": "Bearer token"},
-              progressWidget: const Center(
-                child: CircularProgressIndicator(),
-              ),
-              errorWidget: const Center(
-                child: Icon(Icons.error),
-              ),
-              imageUri:
-                  "https://www.loudegg.com/wp-content/uploads/2020/10/Fred-Flintstone.jpg",
+              // A browser cannot attach custom headers to a cross origin
+              // image, so headers are only sent on native platforms here.
+              headers: kIsWeb
+                  ? const <String, String>{}
+                  : const {'Authorization': 'Bearer token'},
+              progressWidget: const Center(child: CircularProgressIndicator()),
+              errorWidget: const Center(child: Icon(Icons.error)),
+              imageUri: "https://www.loudegg.com/wp-content/uploads/2020/10/Fred-Flintstone.jpg",
               fit: BoxFit.fitHeight,
               onProgress: (progress) {
                 debugPrint(
-                    "Download progress: ${(progress * 100).toStringAsFixed(2)}%");
+                  "Download progress: ${(progress * 100).toStringAsFixed(2)}%",
+                );
               },
             ),
           ],

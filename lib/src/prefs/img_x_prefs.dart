@@ -1,35 +1,52 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:imgx/src/cache/img_x_cache.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:imgx/src/prefs/local_store.dart';
 
 /// Created by lovepreetsingh on 14,November,2024
 
 mixin ImgXPrefs {
   /// Save data in cache
-  Future saveImageCache(String key, CacheModel data) async {
-    return (await SharedPreferences.getInstance())
-        .setString(key, jsonEncode(data.toJson()));
+  Future<void> saveImageCache(String key, CacheModel data) async {
+    await LocalStore.instance.write(
+      key,
+      _encode(data.data),
+      expiresAtMs: data.cacheDuration,
+    );
   }
 
   /// Get data from cache
   Future<CacheModel?> getImageCache(String key) async {
-    var data = (await SharedPreferences.getInstance()).getString(key);
-    if (data == null) {
+    final entry = await LocalStore.instance.read(key);
+    if (entry == null) {
       return null;
     }
-    Map<String, dynamic> jsonData = jsonDecode(data);
-    return CacheModel(
-        data: jsonData['data'], cacheDuration: jsonData['cacheDuration']);
+    return CacheModel(data: entry.bytes, cacheDuration: entry.expiresAtMs);
   }
 
   /// Remove data from cache
-  Future remove(String key) async {
-    await (await SharedPreferences.getInstance()).remove(key);
-  }
+  Future<void> remove(String key) => LocalStore.instance.delete(key);
 
   /// Clear all data from cache
-  Future clearAll() async {
-    await (await SharedPreferences.getInstance()).clear();
+  Future<void> clearAll() => LocalStore.instance.clear();
+
+  /// Converts cached data to bytes so it can be written to a file.
+  ///
+  /// Image bytes are stored as-is, anything else is stored as JSON.
+  Uint8List _encode(dynamic data) {
+    if (data is Uint8List) {
+      return data;
+    }
+    if (data is TypedData) {
+      return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    }
+    if (data is List<int>) {
+      return Uint8List.fromList(data);
+    }
+    if (data is ByteBuffer) {
+      return data.asUint8List();
+    }
+    return Uint8List.fromList(utf8.encode(jsonEncode(data)));
   }
 }

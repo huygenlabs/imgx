@@ -18,8 +18,12 @@ void main() {
       final key = 'image_1';
       final data = 'test_image_data';
       final cacheDuration = Duration(minutes: 5);
-      imgXCache.putCache(key, data,
-          cacheType: CacheType.memory, cacheDuration: cacheDuration);
+      imgXCache.putCache(
+        key,
+        data,
+        cacheType: CacheType.memory,
+        cacheDuration: cacheDuration,
+      );
 
       // Check if the data is stored in memory cache
       final cachedData = imgXCache.getFromMemory(key, cacheDuration);
@@ -30,9 +34,14 @@ void main() {
       final key = 'image_3';
       final data = 'expired_data';
       final cacheDuration = Duration(
-          milliseconds: -1); // Set a negative duration to expire immediately
-      imgXCache.putCache(key, data,
-          cacheType: CacheType.memory, cacheDuration: cacheDuration);
+        milliseconds: -1,
+      ); // Set a negative duration to expire immediately
+      imgXCache.putCache(
+        key,
+        data,
+        cacheType: CacheType.memory,
+        cacheDuration: cacheDuration,
+      );
 
       final cachedData = imgXCache.getFromMemory(key, cacheDuration);
       expect(cachedData, isNull);
@@ -42,8 +51,12 @@ void main() {
       final key = 'image_4';
       final data = 'data_to_remove';
       final cacheDuration = Duration(minutes: 5);
-      imgXCache.putCache(key, data,
-          cacheType: CacheType.memory, cacheDuration: cacheDuration);
+      imgXCache.putCache(
+        key,
+        data,
+        cacheType: CacheType.memory,
+        cacheDuration: cacheDuration,
+      );
 
       // Remove the data
       imgXCache.removeFromMemory('image_4');
@@ -59,10 +72,18 @@ void main() {
       final key2 = 'image_6';
       final data2 = 'data_2';
       final cacheDuration = Duration(minutes: 5);
-      imgXCache.putCache(key1, data1,
-          cacheType: CacheType.memory, cacheDuration: cacheDuration);
-      imgXCache.putCache(key2, data2,
-          cacheType: CacheType.memory, cacheDuration: cacheDuration);
+      imgXCache.putCache(
+        key1,
+        data1,
+        cacheType: CacheType.memory,
+        cacheDuration: cacheDuration,
+      );
+      imgXCache.putCache(
+        key2,
+        data2,
+        cacheType: CacheType.memory,
+        cacheDuration: cacheDuration,
+      );
 
       // Clear all data
       imgXCache.clearAllMemoryCache();

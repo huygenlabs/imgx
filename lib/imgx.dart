@@ -29,19 +29,20 @@ class ImgX extends ImgXLoader {
    * */
 
   ///
-  const ImgX(
-      {super.key,
-      required super.imageUri,
-      super.width,
-      super.height,
-      super.fit = BoxFit.cover,
-      super.headers,
-      super.retryCount,
-      super.progressWidget,
-      super.errorWidget,
-      super.cacheType,
-      super.cacheDuration,
-      super.onProgress});
+  const ImgX({
+    super.key,
+    required super.imageUri,
+    super.width,
+    super.height,
+    super.fit = BoxFit.cover,
+    super.headers,
+    super.retryCount,
+    super.progressWidget,
+    super.errorWidget,
+    super.cacheType,
+    super.cacheDuration,
+    super.onProgress,
+  });
 
   /// Remove cached image where key is [key]
   static Future removeCacheWhere({required String key}) =>

@@ -8,9 +8,7 @@ void main() {
   ImgXConfig.globalProgressWidget = const Center(
     child: CircularProgressIndicator(),
   );
-  ImgXConfig.globalErrorWidget = const Center(
-    child: Icon(Icons.error),
-  );
+  ImgXConfig.globalErrorWidget = const Center(child: Icon(Icons.error));
   ImgXConfig.globalRetryCount = 3;
 
   ImgX.removeCacheWhere(key: "key");
