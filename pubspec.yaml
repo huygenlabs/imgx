@@ -23,3 +23,7 @@ topics:
   - image-caching
   - image-download
   - image-retry
+
+screenshots:
+  - description: "The ImgX logo, an X built from pixels on a violet background."
+    path: doc/icon.png
