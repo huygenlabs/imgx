@@ -1,29 +1,3 @@
-## [0.1.0] - (15th November 2024)
-
-- Initial release: Load images from a url, cache it in memory or disk and a retry mechanism in case of failure.
-
-## [0.1.1] - (16th November 2024)
-
-- Improved package score.
-
-## [0.1.2] - (16th November 2024)
-
-- Improved documentation and score.
-
-- ## [0.1.3] - (16th November 2024)
-
-- Added test cases for the package.
- 
-- ## [0.1.4] - (8th January 2025)
-
-- Fix for cache removal from memory.
-- Updated dependencies.
-- 
-- ## [0.1.5] - (30th June 2025)
-
-- Global option to set error logs.
-- Updated to Flutter 3.32.5
-
 ## [0.1.6] - (26th October 2026)
 
 - Removed the `shared_preferences` dependency.
@@ -36,3 +10,29 @@
 - A rebuild of `ImgX` no longer starts a second download, because the request future is kept in the widget state.
 - Disk entries written by 0.1.5 are not migrated or re-read; they stay behind in the platform preferences and disappear when app data is cleared.
 - Minimum SDK raised to Dart 3.13 / Flutter 3.47, CI now runs Flutter 3.47.7, and sources were reformatted with the current `dart format` style.
+
+## [0.1.5] - (30th June 2025)
+
+- Global option to set error logs.
+- Updated to Flutter 3.32.5
+
+## [0.1.4] - (8th January 2025)
+
+- Fix for cache removal from memory.
+- Updated dependencies.
+
+## [0.1.3] - (16th November 2024)
+
+- Added test cases for the package.
+
+## [0.1.2] - (16th November 2024)
+
+- Improved documentation and score.
+
+## [0.1.1] - (16th November 2024)
+
+- Improved package score.
+
+## [0.1.0] - (15th November 2024)
+
+- Initial release: Load images from a url, cache it in memory or disk and a retry mechanism in case of failure.

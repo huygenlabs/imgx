@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/huygenlabs/imgx/master/doc/icon.png" alt="ImgX icon" width="128">
+</p>
+
 It is a Flutter package for efficient image loading from URLs, supporting formats like PNG, JPG, WEBP, and GIF. It features memory/disk caching with expiration, a retry mechanism for failures, and real-time progress tracking for seamless server image handling.
 
 # Usage
