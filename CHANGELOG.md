@@ -1,3 +1,7 @@
+## [0.1.7] - (26th October 2026)
+
+- Optimized code for performance.
+
 ## [0.1.6] - (26th October 2026)
 
 - Removed the `shared_preferences` dependency.
