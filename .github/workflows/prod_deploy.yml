@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write # create the GitHub release
+
     steps:
       - uses: actions/checkout@v4
 
@@ -37,4 +40,18 @@ jobs:
         run: flutter test
 
       - name: Deploy on pub.dev
-        run: dart pub publish
+        env:
+          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
+        run: |
+          mkdir -p ~/.config/dart
+          echo "$PUB_CREDENTIALS" > ~/.config/dart/pub-credentials.json
+          flutter pub publish --force
+
+      # Tags the published commit as v<pubspec version>, with its CHANGELOG section as notes.
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(sed -n 's/^version: *//p' pubspec.yaml)
+          awk -v v="$version" '/^## \[/ { found = index($0, "[" v "]"); next } found' CHANGELOG.md > notes.md
+          gh release create "v$version" --target "$GITHUB_SHA" --title "v$version" --notes-file notes.md
